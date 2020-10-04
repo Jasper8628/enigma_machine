@@ -2,7 +2,7 @@
     width: 50px;
     height: 220px;
     /* display: flex; */
-    border: black solid 2px;
+    border: grey solid 2px;
     border-radius: 5rem;
     margin:10px;
     text-align: center;

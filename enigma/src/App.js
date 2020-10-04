@@ -7,6 +7,7 @@ import Bulbs from './components/bulbs'
 function App() {
   return (
     <div className="container">
+      <h1>Enigma Machine</h1>
       <Bulbs />
       <Buttons />
     </div>

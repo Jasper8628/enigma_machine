@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react'
 import './style.css'
 import Spinner from '../numSpinner'
+import Message from '../message'
 
 function Index() {
     const letterArray = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
@@ -15,7 +16,12 @@ function Index() {
         9, 4, 7, 2, 8, 6, 1, 5,
         11, 3
     ];
+    const [code, setCode] = useState('')
     const [letter, setLetter] = useState('')
+    const [message, setMessage] = useState({
+        plain: [],
+        encripted: []
+    })
     const [state, setState] = useState({
         array1: [
             [0, 18], [1, 23], [2, 5],
@@ -51,10 +57,8 @@ function Index() {
             [24, 8], [25, 2]
         ],
     })
-
     useEffect(() => {
-        const random = Math.floor(Math.random() * 17000)
-        shuffle(random)
+        reset()
     }, [])
 
     const handleClick = (e) => {
@@ -74,6 +78,12 @@ function Index() {
         setTimeout(() => {
             button.style.backgroundColor = 'white'
         }, 2000);
+        message.plain.push(buttonName);
+        message.encripted.push(finalLetter)
+        setMessage({
+            plain: message.plain,
+            encripted: message.encripted
+        })
         setLetter(finalLetter)
         shuffle(1)
     }
@@ -81,6 +91,18 @@ function Index() {
     const handleBlur = (e) => {
         const button = document.getElementById(letter)
         button.style.backgroundColor = 'white'
+    }
+
+    const reset = (e) => {
+        const random = Math.floor(Math.random() * 17000)
+        shuffle(random)
+        setCode(`${state.array3[0][0]} ${state.array2[0][0]} ${state.array1[0][0]}`)
+        setMessage({
+            plain: [],
+            encripted: []
+        })
+        setLetter('')
+
     }
 
     const shuffle = (num) => {
@@ -140,7 +162,6 @@ function Index() {
                     handleUp={handleUp}
                     handleDown={handleDown}
                     display={state.array1} />
-
             </div>
 
             <div className='row'>
@@ -158,6 +179,18 @@ function Index() {
                 {thirdRow.map((letter, index) => (
                     <button onClick={handleClick} onBlur={handleBlur} className="buttons" name={`${letter}`} key={index}>{letter}</button>
                 ))}
+            </div>
+            <div className='btm-container'>
+                <Message
+                    code={code}
+                    message={message.plain.join('').toString()}
+                    encripted={message.encripted.join('').toString()}
+                />
+                <div className='post-container'>
+                    <button className="postBtn" onClick={reset}>Reset</button>
+                    <button className="postBtn">Post</button>
+                    <button className="postBtn">Message Board</button>
+                </div>
 
             </div>
         </div>

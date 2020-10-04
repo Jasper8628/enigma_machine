@@ -1,3 +1,15 @@
 .container{
   display: flexbox;
+  width: 60vw;
+  margin: 0 auto;
+}
+body{
+  background-color: black;
+}
+h1{
+  margin-top: 50px;
+  font-size: 54px;
+  font-weight: 400;
+  text-align: center;
+  color: beige;
 }
