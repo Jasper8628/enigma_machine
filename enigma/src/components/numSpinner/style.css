@@ -1,0 +1,27 @@
+.spinner{
+    width: 50px;
+    height: 220px;
+    /* display: flex; */
+    border: black solid 2px;
+    border-radius: 5rem;
+    margin:10px;
+    text-align: center;
+    /* align-items: center; */
+    padding-top: 10px;
+    font-weight: 700;
+    font-size: 16px;
+}
+
+.spinContainer{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+.secondary{
+    color: grey;
+}
+.primary{
+    padding-top: 10px;
+    height: 35px;
+    background-color: beige;
+}
