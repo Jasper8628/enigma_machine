@@ -4,18 +4,22 @@
     /* display: flex; */
     border: grey solid 2px;
     border-radius: 5rem;
-    margin:10px;
+    margin:20px;
+    margin-top: 0px;
     text-align: center;
     /* align-items: center; */
-    padding-top: 10px;
+    padding-top: 5px;
     font-weight: 700;
     font-size: 16px;
+}
+.spinner:hover{
+    border: lightgrey solid 2px;
 }
 
 .spinContainer{
     display: flex;
     justify-content: center;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
 }
 .secondary{
     color: grey;
@@ -23,5 +27,19 @@
 .primary{
     padding-top: 10px;
     height: 35px;
-    background-color: beige;
+    background-color: #f8f0b9d5;
+}
+.fas{
+    cursor: pointer;
+    font-size: 28px;
+    color:#f8f0b9d5 ;
+    background: transparent;
+    border: none;
+}
+.fas:hover{
+    text-shadow:0 0 1px #f8f0b9d5,0 0 4px #f8f0b9d5, 0 0 8px #f8f0b9d5;
+}
+.fas:active{
+    color:#f8f0b97c ;
+    text-shadow: none;
 }

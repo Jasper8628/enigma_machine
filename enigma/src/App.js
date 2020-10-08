@@ -3,13 +3,21 @@ import logo from './logo.svg';
 import './App.css';
 import Buttons from './components/buttons'
 import Bulbs from './components/bulbs'
+import Board from './components/messageBoard'
+import Amplify from 'aws-amplify'
+import config from './aws-exports'
+Amplify.configure(config);
 
 function App() {
   return (
-    <div className="container">
-      <h1>Enigma Machine</h1>
-      <Bulbs />
-      <Buttons />
+    <div className="app">
+      <div className="container">
+        <h1>Enigma Machine</h1>
+        <Bulbs />
+        <Buttons />
+      </div>
+      <Board />
+
     </div>
   );
 }

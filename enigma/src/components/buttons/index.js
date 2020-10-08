@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import './style.css'
 import Spinner from '../numSpinner'
 import Message from '../message'
+import Amplify, { API } from 'aws-amplify'
 
 function Index() {
     const letterArray = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
@@ -17,6 +18,7 @@ function Index() {
         11, 3
     ];
     const [code, setCode] = useState('')
+    const [name, setName] = useState('Anonymous')
     const [letter, setLetter] = useState('')
     const [message, setMessage] = useState({
         plain: [],
@@ -59,24 +61,47 @@ function Index() {
     })
     useEffect(() => {
         reset()
+        handleGet()
     }, [])
+    const handleGet = (e) => {
+        API.get('api', '/api')
+            .then(res => {
+                console.log(res)
+            })
+    }
+    const handlePost = (e) => {
+        API.post('api', '/api', {
+            body: {
+                name: name,
+                message: message.encripted,
+                code: code,
+                time: `${new Date()}`
+            }
+        })
+        console.log({
+            name: name,
+            message: message.encripted,
+            code: code,
+            time: `${new Date()}`
+        })
+    }
 
     const handleClick = (e) => {
-        const buttonName = e.target.name
+        const buttonName = e.target.getAttribute('name');
         const letterIndex = letterArray.indexOf(buttonName);
-        const firstRoterIndex = state.array1[letterIndex][1];
-        const secRoterIndex = state.array2[firstRoterIndex][1];
-        const thirdRoterIndex = state.array3[secRoterIndex][1];
-        const linkIndex = linkage[thirdRoterIndex];
-        const thirdRoterPosition = state.array3.filter(item => item[1] === linkIndex)
-        const secRoterPosition = state.array2.filter(item => item[1] === state.array3.indexOf(thirdRoterPosition[0]));
-        const firstRoterPosition = state.array1.filter(item => item[1] === state.array2.indexOf(secRoterPosition[0]));
-        const finalLetterIndex = state.array1.indexOf(firstRoterPosition[0]);
+        const firstRotorIndex = state.array1[letterIndex][1];
+        const secRotorIndex = state.array2[firstRotorIndex][1];
+        const thirdRotorIndex = state.array3[secRotorIndex][1];
+        const linkIndex = linkage[thirdRotorIndex];
+        const thirdRotorPosition = state.array3.filter(item => item[1] === linkIndex)
+        const secRotorPosition = state.array2.filter(item => item[1] === state.array3.indexOf(thirdRotorPosition[0]));
+        const firstRotorPosition = state.array1.filter(item => item[1] === state.array2.indexOf(secRotorPosition[0]));
+        const finalLetterIndex = state.array1.indexOf(firstRotorPosition[0]);
         const finalLetter = letterArray[finalLetterIndex]
         const button = document.getElementById(finalLetter)
-        button.style.backgroundColor = 'yellow'
+        button.classList.add('glow')
         setTimeout(() => {
-            button.style.backgroundColor = 'white'
+            button.classList.remove('glow')
         }, 2000);
         message.plain.push(buttonName);
         message.encripted.push(finalLetter)
@@ -90,19 +115,18 @@ function Index() {
 
     const handleBlur = (e) => {
         const button = document.getElementById(letter)
-        button.style.backgroundColor = 'white'
+        button.classList.remove('glow')
     }
 
     const reset = (e) => {
         const random = Math.floor(Math.random() * 17000)
         shuffle(random)
+        setLetter('')
         setCode(`${state.array3[0][0]} ${state.array2[0][0]} ${state.array1[0][0]}`)
         setMessage({
             plain: [],
             encripted: []
         })
-        setLetter('')
-
     }
 
     const shuffle = (num) => {
@@ -144,6 +168,22 @@ function Index() {
             name: newArray
         })
     }
+    const handleSidebar = (e) => {
+        const sideBar = document.getElementById("sidebar")
+        const sideBarDisplay = sideBar.style.width;
+        // if (sideBarDisplay === 'block') {
+        //     sideBar.style.display = "none"
+        // } else {
+        //     sideBar.style.display = "block"
+        //     sideBar.style.width = '300px'
+        // }
+        if (sideBarDisplay == "300px") {
+            sideBar.style.width = '0px'
+        } else {
+            sideBar.style.width = '300px'
+        }
+
+    }
     return (
         <div className="button-container">
             <div className="spinContainer">
@@ -163,16 +203,16 @@ function Index() {
                     handleDown={handleDown}
                     display={state.array1} />
             </div>
-
             <div className='row'>
                 {firstRow.map((letter, index) => (
                     <button onClick={handleClick} onBlur={handleBlur} className="buttons" name={`${letter}`} key={index}>{letter}</button>
                 ))}
-
             </div>
             <div className='row'>
                 {secRow.map((letter, index) => (
-                    <button onClick={handleClick} onBlur={handleBlur} className="buttons" name={`${letter}`} key={index}>{letter}</button>
+                    letter === "F" || letter === "J" ?
+                        <button onClick={handleClick} onBlur={handleBlur} className="buttons" name={`${letter}`} key={index}><span className="tactile" name={`${letter}`}>{letter}</span></button> :
+                        <button onClick={handleClick} onBlur={handleBlur} className="buttons" name={`${letter}`} key={index}>{letter}</button>
                 ))}
             </div>
             <div className='row'>
@@ -188,13 +228,11 @@ function Index() {
                 />
                 <div className='post-container'>
                     <button className="postBtn" onClick={reset}>Reset</button>
-                    <button className="postBtn">Post</button>
-                    <button className="postBtn">Message Board</button>
+                    <button className="postBtn" onClick={handlePost}>Post</button>
+                    <button className="postBtn" onClick={handleSidebar}> Message Board</button>
                 </div>
-
             </div>
         </div>
-
     )
 }
 

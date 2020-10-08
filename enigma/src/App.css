@@ -7,9 +7,12 @@ body{
   background-color: black;
 }
 h1{
-  margin-top: 50px;
-  font-size: 54px;
+  margin: 70px;
+  font-size: 60px;
   font-weight: 400;
   text-align: center;
-  color: beige;
+  color: rgba(207, 207, 94, 0.815);
+}
+.app{
+  display: flex;
 }

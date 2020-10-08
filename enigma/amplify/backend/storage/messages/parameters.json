@@ -1,0 +1,7 @@
+{
+    "tableName": "messages",
+    "partitionKeyName": "time",
+    "partitionKeyType": "S",
+    "sortKeyName": "message",
+    "sortKeyType": "S"
+}
