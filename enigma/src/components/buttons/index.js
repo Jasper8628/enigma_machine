@@ -4,6 +4,7 @@ import './style.css'
 import Spinner from '../numSpinner'
 import Message from '../message'
 import Amplify, { API } from 'aws-amplify'
+import axios from 'axios'
 
 function Index() {
     const letterArray = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
@@ -64,26 +65,27 @@ function Index() {
         handleGet()
     }, [])
     const handleGet = (e) => {
-        API.get('api', '/api')
+        axios.get('https://3n45g8mjpd.execute-api.ap-southeast-2.amazonaws.com/enigma/')
             .then(res => {
-                console.log(res)
+                console.log(res.data.items)
             })
     }
     const handlePost = (e) => {
-        API.post('api', '/api', {
-            body: {
-                name: name,
-                message: message.encripted,
-                code: code,
-                time: `${new Date()}`
-            }
-        })
-        console.log({
+        const date = new Date(),
+            month = date.getMonth() + 1,
+            day = date.getDate(),
+            year = date.getFullYear();
+        const newDate = [year, month, day].join('-')
+
+        const body = {
             name: name,
-            message: message.encripted,
+            message: message.encripted.join('').toString(),
             code: code,
-            time: `${new Date()}`
-        })
+            time: `${newDate}`
+        };
+        axios.post('https://3n45g8mjpd.execute-api.ap-southeast-2.amazonaws.com/enigma/', body)
+            .then(res => console.log(res))
+        reset()
     }
 
     const handleClick = (e) => {
@@ -170,17 +172,18 @@ function Index() {
     }
     const handleSidebar = (e) => {
         const sideBar = document.getElementById("sidebar")
-        const sideBarDisplay = sideBar.style.width;
-        // if (sideBarDisplay === 'block') {
-        //     sideBar.style.display = "none"
-        // } else {
-        //     sideBar.style.display = "block"
-        //     sideBar.style.width = '300px'
-        // }
-        if (sideBarDisplay == "300px") {
+        let sideBarDisplay = sideBar.style.display;
+        let sideBarWidth = sideBar.style.width;
+        if (sideBarWidth == "300px") {
             sideBar.style.width = '0px'
+            setTimeout(() => {
+                sideBar.style.display = 'none'
+            }, 800);
         } else {
-            sideBar.style.width = '300px'
+            sideBar.style.display = 'block'
+            setTimeout(() => {
+                sideBar.style.width = '300px'
+            }, 10);
         }
 
     }

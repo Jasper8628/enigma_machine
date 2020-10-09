@@ -1,7 +1,20 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import './style.css'
+import axios from 'axios'
 
 function Index() {
+    useEffect(() => {
+        handleGet()
+    }, [])
+    const handleGet = (e) => {
+        axios.get('https://3n45g8mjpd.execute-api.ap-southeast-2.amazonaws.com/enigma/')
+            .then(res => {
+                setDisplay(res.data.items)
+                console.log(res.data.items)
+            })
+    }
+
+    const [display, setDisplay] = useState([])
     const data =
         [{
             name: "annonymous",
@@ -28,10 +41,10 @@ function Index() {
 
     return (
         <div className="message-board" id="sidebar">
-            <h3>Messages left by others:</h3>
-            {data.map((message, index) => (
+            <h3>Messages left by others:  <span onClick={handleGet} className='fas fa-sync-alt'></span></h3>
+            {display.map((message, index) => (
                 <div key={index} className="card">
-                    <p>by <span className="user-name">{message.name} </span> at {message.time}</p>
+                    <p>by <span className="user-name">{message.name} </span> on {message.time}</p>
                     <p>message: {message.message}</p>
                     <p>code: {message.code}</p>
                 </div>

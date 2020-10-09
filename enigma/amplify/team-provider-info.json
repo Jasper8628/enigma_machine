@@ -10,6 +10,18 @@
       "StackName": "amplify-enigma-dev-230912",
       "StackId": "arn:aws:cloudformation:ap-southeast-2:626861680176:stack/amplify-enigma-dev-230912/eb02f140-0895-11eb-bace-0a77915fb5d8",
       "AmplifyAppId": "do6fo3su9ao2s"
+    },
+    "categories": {
+      "function": {
+        "enigmaa207fff5DefineAuthChallenge": {},
+        "enigmaa207fff5CreateAuthChallenge": {},
+        "enigmaa207fff5VerifyAuthChallengeResponse": {
+          "RECAPTCHASECRET": ""
+        }
+      },
+      "auth": {
+        "enigmaa207fff5": {}
+      }
     }
   }
 }

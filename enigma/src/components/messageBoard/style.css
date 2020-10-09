@@ -1,9 +1,9 @@
 .message-board{
     height: 100vh;
-    width: 0px;
+    width:0px;
     background-color: beige;
     padding-top: 10px;
-    display: block;
+    display: none;
     transition: 0.8s;
 
 }
@@ -18,4 +18,14 @@ h3{
 }
 .user-name{
     font-weight:bold ;
+}
+.fa-sync-alt{
+    color: grey;
+    font-size: 16px;
+}
+.fa-sync-alt:hover{
+    color:black
+}
+.fa-sync-alt:active{
+    color:lightgrey
 }

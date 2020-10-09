@@ -6,6 +6,7 @@ import Bulbs from './components/bulbs'
 import Board from './components/messageBoard'
 import Amplify from 'aws-amplify'
 import config from './aws-exports'
+import { withAuthenticator } from '@aws-amplify/ui-react'
 Amplify.configure(config);
 
 function App() {
