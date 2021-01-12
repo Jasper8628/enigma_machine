@@ -1,12 +1,12 @@
 .buttons{
-    width: 60px;
-    height: 60px;
+    width: clamp(3vw,4vw,60px);
+    height: clamp(3vw,4vw,60px);;
     border-radius: 5rem;
     margin: 10px;
     border: grey solid 3px;
     color: grey;
     background-color: black;
-    font-size: 32px;
+    font-size: clamp(2vw,3vw,40px);;
     font-weight: 600;
     z-index: 100;
     cursor: pointer;;

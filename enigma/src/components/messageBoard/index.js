@@ -10,7 +10,6 @@ function Index() {
         axios.get('https://3n45g8mjpd.execute-api.ap-southeast-2.amazonaws.com/enigma/')
             .then(res => {
                 setDisplay(res.data.items)
-                console.log(res.data.items)
             })
     }
 

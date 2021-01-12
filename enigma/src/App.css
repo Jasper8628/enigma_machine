@@ -4,11 +4,14 @@
   margin: 0 auto;
 }
 body{
-  background-color: black;
+  background-color: rgb(0, 0, 0);
+  /* background-image: url("./images/enigma_machine.jpg");
+  background-repeat: no-repeat;
+  background-size: cover; */
 }
 h1{
-  margin: 70px;
-  font-size: 60px;
+  margin: clamp(2vw,3vw,60px);;
+  font-size: clamp(2vw,3vw,60px);
   font-weight: 400;
   text-align: center;
   color: rgba(207, 207, 94, 0.815);

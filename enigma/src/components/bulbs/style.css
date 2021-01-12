@@ -1,11 +1,11 @@
 .bulbs{
-    width: 45px;
-    height: 45px;
+    width: clamp(2vw,3vw,45px);
+    height: clamp(2vw,3vw,45px);;
     margin:5px;
     color: darkgray;
     border-radius: 5rem;
     background-color:#FFFFF0;
-    font-size: 24px;
+    font-size: clamp(1.2vw,1.8vw,24px);;
     font-weight: 600;
     border:none
 }
