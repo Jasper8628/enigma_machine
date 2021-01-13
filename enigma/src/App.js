@@ -17,7 +17,7 @@ function App() {
         <Bulbs />
         <Buttons />
       </div>
-      <Board />
+      {/* <Board /> */}
 
     </div>
   );

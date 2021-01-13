@@ -1,11 +1,18 @@
 .message-board{
+    position: fixed;
+    display: inline;
+    right:-50%;
+    top:0%;
     height: 100%;
-    width:0px;
     background-color: beige;
     padding-top: 10px;
-    display: none;
-    transition: 0.8s;
+    transition: 1s;
 
+}
+.message-board.sideOpen{
+    display: inline;
+    width:clamp(200px,20vw,300px);
+    right:0%;
 }
 .card{
     margin:20px;

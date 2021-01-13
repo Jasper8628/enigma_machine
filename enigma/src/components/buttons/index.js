@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import './style.css'
 import Spinner from '../numSpinner'
 import Message from '../message'
+import Board from '../messageBoard';
 import Amplify, { API } from 'aws-amplify'
 import axios from 'axios'
 
@@ -170,71 +171,77 @@ function Index() {
             name: newArray
         })
     }
+    const [side, setSide] = useState('')
     const handleSidebar = (e) => {
-        const sideBar = document.getElementById("sidebar")
-        let sideBarDisplay = sideBar.style.display;
-        let sideBarWidth = sideBar.style.width;
-        if (sideBarWidth == "300px") {
-            sideBar.style.width = '0px'
-            setTimeout(() => {
-                sideBar.style.display = 'none'
-            }, 800);
-        } else {
-            sideBar.style.display = 'block'
-            setTimeout(() => {
-                sideBar.style.width = '300px'
-            }, 10);
-        }
+        setSide(side === '' ? 'sideOpen' : '')
+        // const sideBar = document.getElementById("sidebar")
+        // let sideBarDisplay = sideBar.style.display;
+        // let sideBarWidth = sideBar.style.width;
+        // if (sideBarWidth == "300px") {
+        //     sideBar.style.width = '0px'
+        //     setTimeout(() => {
+        //         sideBar.style.display = 'none'
+        //     }, 800);
+        // } else {
+        //     sideBar.style.display = 'block'
+        //     setTimeout(() => {
+        //         sideBar.style.width = '300px'
+        //     }, 10);
+        // }
 
     }
     return (
-        <div className="button-container">
-            <div className="spinContainer">
-                <Spinner
-                    name='array3'
-                    handleUp={handleUp}
-                    handleDown={handleDown}
-                    display={state.array3} />
-                <Spinner
-                    name='array2'
-                    handleUp={handleUp}
-                    handleDown={handleDown}
-                    display={state.array2} />
-                <Spinner
-                    name='array1'
-                    handleUp={handleUp}
-                    handleDown={handleDown}
-                    display={state.array1} />
-            </div>
-            <div className='row'>
-                {firstRow.map((letter, index) => (
-                    <button onClick={handleClick} onBlur={handleBlur} className="buttons" name={`${letter}`} key={index}>{letter}</button>
-                ))}
-            </div>
-            <div className='row'>
-                {secRow.map((letter, index) => (
-                    letter === "F" || letter === "J" ?
-                        <button onClick={handleClick} onBlur={handleBlur} className="buttons" name={`${letter}`} key={index}><span className="tactile" name={`${letter}`}>{letter}</span></button> :
+        <div>
+            <div className="button-container">
+                <div className="spinContainer">
+                    <Spinner
+                        name='array3'
+                        handleUp={handleUp}
+                        handleDown={handleDown}
+                        display={state.array3} />
+                    <Spinner
+                        name='array2'
+                        handleUp={handleUp}
+                        handleDown={handleDown}
+                        display={state.array2} />
+                    <Spinner
+                        name='array1'
+                        handleUp={handleUp}
+                        handleDown={handleDown}
+                        display={state.array1} />
+                </div>
+                <div className='row'>
+                    {firstRow.map((letter, index) => (
                         <button onClick={handleClick} onBlur={handleBlur} className="buttons" name={`${letter}`} key={index}>{letter}</button>
-                ))}
-            </div>
-            <div className='row'>
-                {thirdRow.map((letter, index) => (
-                    <button onClick={handleClick} onBlur={handleBlur} className="buttons" name={`${letter}`} key={index}>{letter}</button>
-                ))}
-            </div>
-            <div className='btm-container'>
-                <Message
-                    code={code}
-                    message={message.plain.join('').toString()}
-                    encripted={message.encripted.join('').toString()}
-                />
-                <div className='post-container'>
-                    <button className="postBtn" onClick={reset}>Reset</button>
-                    <button className="postBtn" onClick={handlePost}>Post</button>
-                    <button className="postBtn" onClick={handleSidebar}> Message Board</button>
+                    ))}
+                </div>
+                <div className='row'>
+                    {secRow.map((letter, index) => (
+                        letter === "F" || letter === "J" ?
+                            <button onClick={handleClick} onBlur={handleBlur} className="buttons" name={`${letter}`} key={index}><span className="tactile" name={`${letter}`}>{letter}</span></button> :
+                            <button onClick={handleClick} onBlur={handleBlur} className="buttons" name={`${letter}`} key={index}>{letter}</button>
+                    ))}
+                </div>
+                <div className='row'>
+                    {thirdRow.map((letter, index) => (
+                        <button onClick={handleClick} onBlur={handleBlur} className="buttons" name={`${letter}`} key={index}>{letter}</button>
+                    ))}
+                </div>
+                <div className='btm-container'>
+                    <Message
+                        code={code}
+                        message={message.plain.join('').toString()}
+                        encripted={message.encripted.join('').toString()}
+                    />
+                    <div className='post-container'>
+                        <button className="postBtn" onClick={reset}>Reset</button>
+                        <button className="postBtn" onClick={handlePost}>Post</button>
+                        <button className="postBtn" onClick={handleSidebar}> Message Board</button>
+                    </div>
                 </div>
             </div>
+            <Board side={side} />
+
         </div>
     )
 }

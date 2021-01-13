@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import './style.css'
 import axios from 'axios'
 
-function Index() {
+function Index({ side }) {
     useEffect(() => {
         handleGet()
     }, [])
@@ -39,7 +39,7 @@ function Index() {
         ]
 
     return (
-        <div className="message-board" id="sidebar">
+        <div className={`message-board ${side}`} id="sidebar">
             <h3>Messages left by others:  <span onClick={handleGet} className='fas fa-sync-alt'></span></h3>
             {display.map((message, index) => (
                 <div key={index} className="card">
